@@ -164,7 +164,9 @@ h4 {
   overflow: hidden;
 }
 
-.primary-button, .secondary-button, .light-button {
+.primary-button,
+.secondary-button,
+.light-button {
   font-size: var(--font-small);
   padding: 0.9em 2em;
   height: auto;
@@ -176,14 +178,14 @@ h4 {
   background-color: var(--primary-color);
   color: var(--white-color);
 }
-.primary-button:hover{
+.primary-button:hover {
   background-color: var(--dark-color);
 }
-.secondary-button{
+.secondary-button {
   background-color: var(--secondary-dark-color);
   color: var(--white-color);
 }
-.secondary-button:hover{
+.secondary-button:hover {
   background-color: var(--light-bg-color);
   color: var(--secondary-dark-color);
 }
@@ -205,13 +207,10 @@ h4 {
   color: var(--light-text-color);
 }
 
-
-
-
 /* --------------------
 *  HEADER
 *----------------------*/
-header li > a {
+:where(.off-canvas, header) li > a {
   display: flex;
   position: relative;
   line-height: inherit;
@@ -242,10 +241,10 @@ header li > a {
   z-index: 1;
   display: none;
 }
-.header-top ul ul li a {
+:where(.header-top, .thetop-nav) ul ul li a {
   padding: 0.25em 1em;
 }
-.header-top ul ul li.current a {
+:where(.header-top, .thetop-nav) ul ul li.current a {
   background-color: var(--border-color);
 }
 .header-top li:hover ul {
@@ -376,7 +375,12 @@ nav .fly-item {
   height: 46px;
   align-items: center;
 }
-
+.dpt-menu .has-child:hover ul {
+  display: block;
+}
+.dpt-menu .has-child li a:hover {
+  text-decoration: underline;
+}
 
 /* --------------------
 *  Search Form
@@ -384,7 +388,7 @@ nav .fly-item {
 .header-main .right {
   flex: 1;
 }
-form{
+form {
   position: relative;
 }
 form.search input {
@@ -397,7 +401,7 @@ form.search input {
   font-size: 0.9em;
   font-weight: var(--fw3);
 }
-form.search :where(span,button) {
+form.search :where(span, button) {
   position: absolute;
   top: 0;
   padding: 0.55em 1.5em;
@@ -421,10 +425,104 @@ form.search button:hover {
   background-color: var(--dark-color);
 }
 
-
 /* --------------------
-*  REUSABLE SELECTOR
+*  Responsive Menu off Canvas
 *----------------------*/
+.site-off{
+  position: fixed;
+  width: 320px;
+  height: var(--percent100);
+  background-color: var(--white-color);
+  overflow-y: auto;
+  z-index: 1000;
+}
+.off-canvas {
+  width: var(--percent100);
+  height: var(--percent100);
+  touch-action: auto;
+  padding: 1.5em;
+}
+.off-canvas .canvas-head {
+  color: var(--white-color);
+  justify-content: space-between;
+  padding: 1.5em;
+  margin: -1.5em -1.5em 1.5em;
+  background-color: var(--secondary-dark-color);
+  border-bottom-right-radius: 160px 25px;
+}
+.off-canvas .canvas-head .logo {
+  z-index: 10;
+  position: relative;
+}
+.off-canvas .canvas-head .logo .circle {
+  opacity: .75;
+}
+.t-close {
+  font-size: 1.25em;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--percent50);
+  background-color: var(--secondary-dark-color);
+  color: var(--white-color);
+  transition: var(--trans-background-color);
+}
+.t-close:hover {
+  background-color: var(--white-color);
+  color: var(--secondary-dark-color);
+  opacity: .75;
+}
+.off-canvas .dpt-head {
+  font-size: var(--font-small);
+  padding: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+  background-color: var(--light-bg-color);
+  border-radius: 7px 7px 0 0;
+}
+.off-canvas .has-child > :where(ul, .mega){
+  font-size: var(--font-small);
+  font-weight: var(--fw3);
+  line-height: 28px;
+  padding-left: 3em;
+}
+.off-canvas .thetop-nav ul, .off-canvas nav > ul {
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: var(--font-small);
+  line-height: 36px;
+  padding-top: 1.25em;
+  margin: 1.25em 0;
+  border-top: 1px solid var(--border-color);
+}
+.off-canvas nav .mega {
+  padding: 0;
+}
+.off-canvas nav .mega .products {
+  display: none;
+}
+.off-canvas .has-child .icon-small {
+  padding: 0.5em;
+  line-height: initial;
+}
+.off-canvas .dpt-menu .icon-small i {
+  transform: rotate(90deg);
+}
+.off-canvas .has-child {
+  width: var(--percent100);
+}
+.off-canvas .thetop-nav .right > ul > :where(:nth-child(4), li:nth-child(5)) > a {
+  display: none;
+}
+.off-canvas .thetop-nav .right ul ul {
+  display: flex;
+  flex-direction: row;
+}
+.off-canvas .thetop-nav .right ul ul li a {
+  padding: 0.5em;
+  border: 1px solid var(--border-color);
+  line-height: 16px;
+  margin: 0 0.5em 0.5em 0;
+}
 
 /* --------------------
 *  REUSABLE SELECTOR
@@ -521,7 +619,7 @@ form.search button:hover {
   nav .mega .products .media {
     height: 400px;
   }
-  nav .mega .products .text-content{
+  nav .mega .products .text-content {
     line-height: initial;
     display: flex;
     flex-direction: column;
@@ -553,10 +651,61 @@ form.search button:hover {
     border-top: 0;
     border-bottom: 0;
   }
-  .dpt-menu > ul > li > a{
+  .dpt-menu > ul > li > a {
     font-weight: var(--fw5);
     padding: 0 1.5em;
     border-bottom: 1px solid var(--border-color);
   }
 
+  .dpt-menu .has-child > ul,
+  .dpt-menu .mega {
+    position: absolute;
+    top: 0;
+    left: var(--percent100);
+    width: var(--percent100);
+    height: auto;
+    min-height: var(--percent100);
+    padding: 1.5em;
+    font-size: var(--font-small);
+    line-height: 2.5em;
+    border: 1px solid var(--border-color);
+    border-top: 0;
+    display: none;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
+
+  /* Showing the first sub menu */
+  /* .dpt-menu .mega {
+    display: block;
+  } */
+  .dpt-menu .beauty ul {
+    background-image: url(assets/menu/menu_bg1.jpg);
+  }
+  .dpt-menu .electric ul {
+    background-image: url(assets/menu/menu_bg2.jpg);
+  }
+  .dpt-menu .fashion ul {
+    background-image: url(assets/menu/menu_bg3.jpg);
+  }
+  .dpt-menu .homekit .mega {
+    background-image: url(assets/menu/menu_bg4.jpg);
+  }
+  .dpt-menu .has-child > :where(ul, .mega)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(225, 225, 222, 1), transparent);
+  }
+  .dpt-menu .mega {
+    width: auto;
+    min-width: var(--percent100);
+  }
+  .dpt-menu .has-child:hover .mega {
+    display: flex;
+  }
 }
